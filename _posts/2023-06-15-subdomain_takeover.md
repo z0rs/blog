@@ -1,5 +1,6 @@
 ---
 title: Potential Subdomain Takeover
+author: z0rs
 date: 2023-06-15 00:00:00 +0800
 categories: [bugbounty, host]
 tags: [writeups, takeover]
