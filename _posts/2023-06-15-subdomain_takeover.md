@@ -5,8 +5,6 @@ categories: [bugbounty, host]
 tags: [writeups, takeover]
 ---
 
-## Research Report on Potential Subdomain Takeover on sendgrid.net Service
-
 ![thumbnail](https://raw.githubusercontent.com/z0rs/z0rs.github.io/master/takeover/takeOver.png)
 
 ### List of contents:
