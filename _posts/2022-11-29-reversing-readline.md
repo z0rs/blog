@@ -2,7 +2,6 @@
 title: "Reversing RedLine Stealer"
 date: 2022-11-29 00:00:00 +0800
 author: "c3rb3ru5d3d53c"
-description: "Reversing Redline Stealer Pron Lure"
 tags: [RedLine, Stealer]
 categories: [Malware]
 ---
