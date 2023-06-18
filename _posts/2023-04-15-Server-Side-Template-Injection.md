@@ -1,5 +1,6 @@
 ---
 title: Server Side Template Injection via Twig Security Extension
+description: vulnerability allows a remote attacker who has access to a Twig environment to invoke any arbitrary PHP function and execute code or commands of their choice
 date: 2023-04-15
 ---
 
