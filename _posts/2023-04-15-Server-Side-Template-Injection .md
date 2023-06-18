@@ -157,7 +157,11 @@ Going back to [1], if $arrow is an array instead of a string or closure, the val
 
 #### Gadget 1: 
 Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
-Serialized payload generated using the phpggc tool: ./phpggc -b Monolog/RCE8 system 'id'
+Serialized payload generated using the phpggc tool: 
+
+```
+./phpggc -b Monolog/RCE8 system 'id'
+```
 
 Compressed payload is generated using:
 
