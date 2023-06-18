@@ -6,12 +6,34 @@ date: 2023-04-15
 ### Overview:
 Shopware is an e-commerce platform that is open source and built on the Symfony Framework and Vue.js. The default storefront of Shopware 6, called Shopware 6 Storefront, is based on Twig and Bootstrap. Users can customize the appearance of their storefront by using extensions (previously known as plugins) to override the default Twig template files. These custom themes can be enabled using the included Shopware 6 Administration panel.
 
-### Summary:
 Please note that this is a bypass of CVE-2023-22731, which is being tracked as issue [NEXT-24667](https://docs.shopware.com/en/shopware-6-en/security-updates/security-update-01-2023) by Shopware.
 
 A vulnerability has been identified that allows bypassing the validation checks implemented by the `Shopware\Core\Framework\Adapter\Twig\SecurityExtension`. This extension is used to prevent the execution of arbitrary PHP functions through default filters in Twig, such as `map()`, `filter()`, `reduce()`, and `sort()`. The `SecurityExtension` was introduced in commit 89d1ea1 to address CVE-2023-22731. It overrides the aforementioned Twig filters (which are enabled by default) and ensures that the callable being executed is a permitted PHP function. However, there is a logic flaw in the validation process: the validation against the list of permitted functions is only performed if the argument passed to the filter is a string. By passing an array as a callable argument, the validation check can be bypassed.
 
 As a result, this vulnerability allows a remote attacker who has access to a Twig environment to invoke any arbitrary PHP function and execute code or commands of their choice. This can be achieved by providing fully-qualified names as arrays of strings when referencing callables.
+
+### Summary:
+
+| Product                      | Shopware                 |
+| ------------------------- | -------------------- |
+| Vendor                      | Shopware AG           |
+| Severity                      | High - Users with login access to Shopware Admin panel may be able to obtain remote code/command execution            |
+| Affected Versions	                      | v6.4.18.1 <= v6.4.20.0, v6.5.0.0-rc1 <= v6.5.0.0-rc4 (Commit facfc88)              |
+| Tested Versions                      | v6.4.20.0 (Latest stable version), v6.5.0.0-rc3 (Latest pre-release version)         | 
+| CVE Identifier                     | CVE-2023-2017            | 
+| CVE Description                      | Server-side Template Injection (SSTI) in Shopware 6 `(<= v6.4.20.0, v6.5.0.0-rc1 <= v6.5.0.0-rc4)`, affecting both shopware/core and shopware/platform GitHub repositories, allows remote attackers with access to a Twig environment without the Sandbox extension to bypass the validation checks in `Shopware\Core\Framework\Adapter\Twig\SecurityExtension` and call any arbitrary PHP function and thus execute arbitrary code/commands via usage of fully-qualified names, supplied as array of strings, when referencing callables. Users are advised to upgrade to v6.4.20.1 to resolve this issue. This is a bypass of CVE-2023-22731.                  |
+| CWE Classification(s)                      | CWE-184: Incomplete List of Disallowed Inputs, CWE-1336: Improper Neutralization of Special Elements Used in a Template Engine           |
+| CAPEC Classification(s)                      | CAPEC-242: Code Injection              |
+
+This is a vulnerability summary for a Server-side Template Injection (SSTI) issue in Shopware 6, `versions v6.4.18.1 to v6.4.20.0 and v6.5.0.0-rc1 to v6.5.0.0-rc4 (Commit facfc88)`. The vulnerability, identified as CVE-2023-2017, allows remote attackers who have access to a Twig environment without the Sandbox extension to bypass validation checks and execute arbitrary code or commands by leveraging fully-qualified names supplied as an array of strings when referencing callables.
+
+The affected software is Shopware, developed by Shopware AG. It is an e-commerce platform used for online shops. The severity of this vulnerability is rated as high, as it can be exploited by users with login access to the Shopware Admin panel.
+
+The vulnerability falls under `CWE-184` (Incomplete List of Disallowed Inputs) and `CWE-1336` (Improper Neutralization of Special Elements Used in a Template Engine). Additionally, it is classified under CAPEC-242 (`Code Injection`), indicating that an attacker can inject malicious code into the system.
+
+Users are advised to upgrade to version v6.4.20.1 to mitigate this issue. It is essential to apply this patch promptly to prevent unauthorized remote code/command execution and maintain the security of Shopware installations. This vulnerability represents a bypass of a previous issue, `CVE-2023-22731`.
+
+Please note that this description is based on the provided information and may not include all the technical details of the vulnerability. It is recommended to refer to official sources, such as the CVE database or vendor advisories, for the most accurate and up-to-date information.
 
 ### CVSS3.1 Scoring System:
 
@@ -19,9 +41,8 @@ As a result, this vulnerability allows a remote attacker who has access to a Twi
 - Vector String: `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H`
 
 
-| Type                      | Name                 |
+| Metric                      | Value                 |
 | ------------------------- | -------------------- |
-| Metric                      | Value             |
 | Attack Vector (AV)                      | Network           |
 | Attack Complexity (AC)                      | Low            |
 | Privileges Required (PR)	                      | Low              |
@@ -30,6 +51,10 @@ As a result, this vulnerability allows a remote attacker who has access to a Twi
 | Confidentiality (C)                      | High                  |
 | Integrity (I)                      | High           |
 | Availability (A)                      | High              |
+
+These scores indicate that the vulnerability can be exploited over the network and does not require complex attack techniques. Additionally, low privileges are needed to exploit the vulnerability, and no user interaction is required. The scope remains unchanged, affecting the vulnerable component only. The impact of this vulnerability is rated as high in terms of confidentiality, integrity, and availability.
+
+Please note that the CVSS3.1 scores are based on a standardized formula and provide a general assessment of the vulnerability's severity. For a more accurate evaluation, it is recommended to consider additional factors and perform a thorough security assessment.
 
 ### Vulnerability Details:
 
