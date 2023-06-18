@@ -31,7 +31,7 @@ github:
   username: z0rs # change to your github username
 
 twitter:
-  username:  # change to your twitter username
+  username:  z0rs_
 
 social:
   # Change to your full name.
@@ -40,8 +40,8 @@ social:
   email:  # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    # https://twitter.com/username # change to your twitter homepage
-     - https://gist.github.com/z0rs # change to your github homepage
+     - https://twitter.com/z0rs_ # change to your twitter homepage
+     - https://github.com/z0rs # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
