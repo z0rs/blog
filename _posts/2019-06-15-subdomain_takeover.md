@@ -44,10 +44,6 @@ To prevent subdomain takeover attacks, proper subdomain management is crucial. T
 
 The conclusion of this report is to provide a deeper understanding of potential subdomain takeover attacks on the subdomain link.coca-cola.com connected to the email marketing service sendgrid.net, and to provide appropriate recommendations to prevent such attacks from occurring. This report is expected to help security professionals and enterprises better understand the security risks associated with subdomain takeover attacks, and be able to take effective measures to protect corporate systems and data.
 
-### Closing
-
-Subdomain takeover attacks pose security risks to systems and data. This report emphasizes the importance of understanding and preventing such attacks. By implementing recommended measures, companies can safeguard their reputation, customer trust, and financial well-being. Effective subdomain management and countermeasures are essential in mitigating the risk of subdomain takeover attacks on enterprise systems and data.
-
 ### Bibliography
 
 - [Barker, J. (2019). Subdomain Takeover Vulnerability Explained. The Hacker News.](https://thehackernews.com/2019/05/subdomain-takeover-vulnerability.html)
