@@ -1,5 +1,6 @@
 ---
 title: Reversing RedLine Stealer
+author: z0rs
 date: 2020-11-29 00:00:00 +0800
 ---
 
