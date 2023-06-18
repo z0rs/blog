@@ -1,5 +1,6 @@
 ---
 title: Potential Subdomain Takeover
+author: Eno
 date: 2019-06-15 00:00:00 +0800
 ---
 
