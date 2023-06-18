@@ -133,16 +133,22 @@ A method of an instantiated object is passed as an array containing an object at
 
 This means that all of the following variable function calls are valid:
 
+#### Type 1: 
 ```
-// Type 1: Simple callback -- invokes system("id")
+Simple callback -- invokes system("id")
 $func = "system";
 $func("id")
-
-// Type 2: Static class method call -- invokes Class::staticMethod($arg)
+```
+#### Type 2: 
+```
+Static class method call -- invokes Class::staticMethod($arg)
 $func = $array("Class", "staticMethod");
 $func($arg);
+```
 
-// Type 3: Object method call -- invokes $obj->method($arg)
+#### Type 3:
+```
+Object method call -- invokes $obj->method($arg)
 $func = $array($obj, "method"));
 $func($arg);
 ```
