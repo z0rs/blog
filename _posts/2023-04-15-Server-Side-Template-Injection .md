@@ -13,6 +13,24 @@ A vulnerability has been identified that allows bypassing the validation checks 
 
 As a result, this vulnerability allows a remote attacker who has access to a Twig environment to invoke any arbitrary PHP function and execute code or commands of their choice. This can be achieved by providing fully-qualified names as arrays of strings when referencing callables.
 
+### CVSS3.1 Scoring System:
+
+- Base Score: 8.8 (High)
+- Vector String: `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H`
+
+
+| Type                      | Name                 |
+| ------------------------- | -------------------- |
+| Metric                      | Value             |
+| Attack Vector (AV)                      | Network           |
+| Attack Complexity (AC)                      | Low            |
+| Privileges Required (PR)	                      | Low              |
+| User Interaction (UI)                      | None         | 
+| Scope (S)                      | Unchanged            | 
+| Confidentiality (C)                      | High                  |
+| Integrity (I)                      | High           |
+| Availability (A)                      | High              |
+
 ### Vulnerability Details:
 
 The vulnerability can be found in the SecurityExtension class declared in `src/Core/Framework/Adapter/Twig/SecurityExtension.php`:
