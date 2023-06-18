@@ -3,8 +3,9 @@
 #- type: github
 #  icon: "fab fa-github"
 
-#- type: twitter
-#  icon: "fab fa-twitter"
+- type: twitter
+  icon: "fab fa-twitter"
+  url:  'https://twitter.com/z0rs_'
 
 #- type: email
 #  icon: "fas fa-envelope"
