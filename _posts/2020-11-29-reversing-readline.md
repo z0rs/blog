@@ -4,10 +4,6 @@ author: z0rs
 date: 2020-11-29 00:00:00 +0800
 ---
 
-## Situation
-
-Muta from `SomeOrdinaryGamers` uploaded a video on *Redline Stealer* on Aug 14, 2022, which infected Martin Shkreli.
-
 ### Key Points
 - *Redline Stealer* has the ability to communicate with multiple C2 hosts.
 - *Redline Stealer* has the ability to present a message box to the user upon execution.
