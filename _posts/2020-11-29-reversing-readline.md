@@ -1,9 +1,6 @@
 ---
-title: "Reversing RedLine Stealer"
-date: 2022-11-29 00:00:00 +0800
-author: "c3rb3ru5d3d53c"
-tags: [RedLine, Stealer]
-categories: [Malware]
+title: Reversing RedLine Stealer
+date: 2020-11-29 00:00:00 +0800
 ---
 
 ## Situation
