@@ -38,24 +38,15 @@ Subdomain takeover attacks compromise the security of enterprise systems and dat
 
 ### Recommendation
 
-To prevent subdomain takeover attacks, companies need to exercise proper subdomain management, including:
-- Monitor unused and expired subdomains regularly, and remove them when not needed
-- Avoid using CNAME subdomains for unrecognized or trusted third party services.
-- Assign unique and unpredictable subdomains to reduce the risk of subdomain takeover attacks.
-- Implement secure DNS configuration for subdomains and enable DNSSEC to improve DNS integrity and security.
+To prevent subdomain takeover attacks, proper subdomain management is crucial. This includes regular monitoring and removal of unused subdomains, avoiding CNAME subdomains for untrusted services, using unique and unpredictable subdomains, and implementing secure DNS configurations with DNSSEC.
 
-It is important to maintain the security of company systems and data by being aware of potential subdomain takeover attacks and taking the necessary precautions. Thus, companies can protect their reputation and customer trust, and prevent financial losses caused by such attacks.
 ### Conclusion
 
 The conclusion of this report is to provide a deeper understanding of potential subdomain takeover attacks on the subdomain link.coca-cola.com connected to the email marketing service sendgrid.net, and to provide appropriate recommendations to prevent such attacks from occurring. This report is expected to help security professionals and enterprises better understand the security risks associated with subdomain takeover attacks, and be able to take effective measures to protect corporate systems and data.
 
 ### Closing
 
-From the research results, it can be concluded that the takeover subdomain on the link.coca-cola.com subdomain can threaten the security of the company's systems and data which can be caused by negligence in subdomain configuration and settings. Therefore, proper precautions are required such as updating DNS configurations and deleting unused or incorrectly registered subdomains.
-
-It is hoped that the recommendations provided in this report will help enterprises and security professionals to raise awareness about subdomain takeover attacks and implement appropriate countermeasures to address security risks resulting from such attacks.
-
-In conclusion, this study demonstrates the importance of effective management of subdomains and implementation of appropriate countermeasures to reduce the risk of subdomain takeover attacks on enterprise systems and data.
+Subdomain takeover attacks pose security risks to systems and data. This report emphasizes the importance of understanding and preventing such attacks. By implementing recommended measures, companies can safeguard their reputation, customer trust, and financial well-being. Effective subdomain management and countermeasures are essential in mitigating the risk of subdomain takeover attacks on enterprise systems and data.
 
 ### Bibliography
 
