@@ -271,7 +271,7 @@ Similar patches should be applied to the `reduce()`, `filter()`, and `sort()` fu
 
 It's important to thoroughly test the patched code and ensure that the changes do not introduce any regressions or unintended consequences. Additionally, reviewing and addressing any other potential security vulnerabilities in the class and related code is recommended to ensure a robust and secure implementation.
 
-### Detection Guidance:
+#### Detection Guidance:
 The following strategies may be used to detect potential exploitation attempts.
 - Search within Twig cache/compiled Twig template files:
 Use the following shell command to search for suspicious usage of `filter`, `map`, `reduce`, and `sort` functions within Twig cache/compiled Twig template files: 
@@ -287,3 +287,15 @@ grep -Priz -e '\|\s*(filter|map|reduce|sort)\s*\(' /path/to/webroot/custom/
 This command recursively searches within the /path/to/webroot/custom/ directory for occurrences of the specified functions.
 
 Note that it is not possible to detect indicators of compromise reliably using the Shopware log file (located at `/path/to/webroot/var/log` by default), as successful exploitation attempts do not generate any additional logs. However, it is worthwhile to examine any PHP errors or warnings logged to determine the existence of any failed exploitation attempts.
+
+#### Conclusion:
+
+The vulnerability described relates to the improper verification of Twig filter functions. It allows for the execution of unsafe or dangerous code if the parameters come from untrusted user input. This can result in unintended code execution or even the execution of malicious code.
+
+To address this vulnerability, a logic fix needs to be implemented in the SecurityExtension class found in the `src/Core/Framework/Adapter/Twig/SecurityExtension.php` file. The suggested patch involves validating that the parameters passed to the filter functions are either a string or a secure Closure. The recommended fix includes using the instanceof operator to check if the parameter is an instance of a Closure and combining conditions `(\is_string() && \in_array())` to ensure that the passed string is an allowed function.
+
+Additionally, detection guidelines have been provided to identify potential exploitation attempts. This involves searching within cached or compiled Twig template files and searching within custom apps, plugins, or themes that may use dangerous filter functions.
+
+In practice, it is crucial to implement the recommended code fixes and regularly run detection strategies to identify potential exploitation attempts. Monitoring PHP logs and examining recorded errors or warnings can also help identify potential failed exploitation attempts.
+
+By taking the appropriate remedial actions and implementing effective detection strategies, the risk of exploitation can be reduced, ensuring the security of systems using the vulnerable SecurityExtension class.
