@@ -135,6 +135,13 @@ This means that all of the following variable function calls are valid:
 
 Going back to [1], if $arrow is an array instead of a string or closure, the validation check to prevent invocation of unsafe functions is completely skipped. Multiple static class methods within Shopware’s codebase and its dependencies were found to be suitable gadgets for achieving for remote code execution:
 
+#### Gadget 1: 
+Using `\Shopware\Core\Framework\Adapter\Cache\CacheValueCompressor::uncompress()` to invoke unserialize()
+Serialized payload generated using the phpggc tool: 
+```
+./phpggc -b Monolog/RCE8 system 'id'
+```
+
 ### Exploit Conditions:
 This vulnerability can be exploited if the attacker has access to:
 - an administrator account, or
