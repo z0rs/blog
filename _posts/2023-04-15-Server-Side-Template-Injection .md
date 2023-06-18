@@ -133,26 +133,6 @@ A method of an instantiated object is passed as an array containing an object at
 
 This means that all of the following variable function calls are valid:
 
-#### Type 1: 
-```
-Simple callback -- invokes system("id")
-$func = "system";
-$func("id")
-```
-#### Type 2: 
-```
-Static class method call -- invokes Class::staticMethod($arg)
-$func = $array("Class", "staticMethod");
-$func($arg);
-```
-
-#### Type 3:
-```
-Object method call -- invokes $obj->method($arg)
-$func = $array($obj, "method"));
-$func($arg);
-```
-
 Going back to [1], if $arrow is an array instead of a string or closure, the validation check to prevent invocation of unsafe functions is completely skipped. Multiple static class methods within Shopware’s codebase and its dependencies were found to be suitable gadgets for achieving for remote code execution:
 
 #### Gadget 1: 
