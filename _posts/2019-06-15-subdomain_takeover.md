@@ -1,21 +1,9 @@
 ---
 title: Potential Subdomain Takeover
-author: z0rs
-date: 2023-06-15 00:00:00 +0800
+date: 2019-06-15 00:00:00 +0800
 ---
 
 ![thumbnail](https://raw.githubusercontent.com/z0rs/z0rs.github.io/master/takeover/takeOver.png)
-
-### List of contents:
-- Abstract
-- Introduction
-- Analysis
-- CVSS Score
-- Impact
-- Recommendation
-- Conclusion
-- Closing
-- Bibliography
 
 ### Abstract
 
